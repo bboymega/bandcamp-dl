@@ -1,5 +1,6 @@
 # bandcamp-dl
-Bandcamp Batch Downloader (Archiver)
+Bandcamp Batch Downloader (Archiver).
+Works directly with the artist homepage of bandcamp.
 
 # Usage:
 `bandcamp-dl.py -l <Artist_Page_URL> -o <OUTPUT_FOLDER>`
