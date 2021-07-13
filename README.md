@@ -8,4 +8,5 @@ e.g.
 `bandcamp-dl.py -l "https://djbobo1.bandcamp.com/" -o "/mnt/sda1/Music"`
 
 Requirements:
-youtube-dl python3
+
+youtube-dl & python3
