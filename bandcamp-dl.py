@@ -1,7 +1,6 @@
 #!/usr/local/bin/python3
 import requests
 import json
-import ffmpeg
 import argparse
 from pathlib import Path
 from getpass import getpass
