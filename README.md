@@ -9,6 +9,14 @@ Works directly with the artist homepage of bandcamp.
 e.g. 
 `bandcamp-dl.py -l "https://djbobo1.bandcamp.com/" -o "/mnt/sda1/Music"`
 
-Requirements:
+# Requirements:
 
-youtube-dl & python3
+youtube-dl
+
+python3
+
+beautifulsoup4
+
+bs4
+
+ffmpeg
