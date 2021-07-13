@@ -20,3 +20,8 @@ beautifulsoup4
 bs4
 
 ffmpeg
+
+requests
+
+json
+
