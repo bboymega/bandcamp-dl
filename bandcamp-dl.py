@@ -13,6 +13,7 @@ import re
 import os
 
 links=[]
+outpath='/'
 
 try:
     opts, args = getopt.getopt(sys.argv[1:],"hl:o:",["help","url=","output="])
