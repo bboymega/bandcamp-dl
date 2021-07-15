@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/local/bin/python3
 import requests
 import json
 import ffmpeg
@@ -15,6 +15,8 @@ import os
 
 links=[]
 outpath='./'
+url=''
+
 try:
     opts, args = getopt.getopt(sys.argv[1:],"hl:o:",["help","url=","output="])
 except getopt.GetoptError:
