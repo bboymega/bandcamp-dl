@@ -1,6 +1,7 @@
-#!/usr/bin/python3
+#!/usr/local/bin/python3
 import requests
 import json
+import ffmpeg
 import argparse
 from pathlib import Path
 from getpass import getpass
@@ -13,8 +14,7 @@ import re
 import os
 
 links=[]
-outpath='/'
-
+outpath='./'
 try:
     opts, args = getopt.getopt(sys.argv[1:],"hl:o:",["help","url=","output="])
 except getopt.GetoptError:
@@ -56,7 +56,10 @@ header={
 }
 
 downloader.headers.update(header)
-page=downloader.get(url+'music', verify=False)
+if(url[len(url)-4:len(url)-1] == 'com'):
+    page=downloader.get(url+'music', verify=False)
+else:
+    page=downloader.get(url, verify=False)
 
 soup = BeautifulSoup(page.text)
 for link in soup.findAll('a', attrs={'href': re.compile("^/track")}):
