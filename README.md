@@ -4,24 +4,34 @@ Bandcamp Batch Downloader (Archiver).
 Works directly with the artist homepage of bandcamp.
 
 # Usage:
-`bandcamp-dl.py -l <Artist_Page_URL> -o <OUTPUT_FOLDER>`
+```
+usage: bandcamp-dl.py [-o OUTPUT] url
 
-e.g. 
-`bandcamp-dl.py -l "https://djbobo1.bandcamp.com/" -o "/mnt/sda1/Music"`
+positional arguments:
+  url                   URL of Video Page
+
+optional arguments:
+  -o OUTPUT, --output OUTPUT
+                        Set Output Location
+```
 
 # Requirements:
-
+```
 youtube-dl
 
 python3
-
-beautifulsoup4
-
-bs4
-
-ffmpeg
 
 requests
 
 json
 
+argparse
+
+io
+
+bs4
+
+re
+
+urllib
+```
