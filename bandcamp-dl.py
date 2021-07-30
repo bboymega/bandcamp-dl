@@ -1,43 +1,25 @@
 #!/usr/local/bin/python3
 import requests
 import json
-import ffmpeg
 import argparse
-from pathlib import Path
-from getpass import getpass
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 from io import StringIO
-import sys, getopt
 from bs4 import BeautifulSoup
 import re
 import os
+import urllib
 
 links=[]
-outpath='./'
-url=''
 
-try:
-    opts, args = getopt.getopt(sys.argv[1:],"hl:o:",["help","url=","output="])
-except getopt.GetoptError:
-    print("Usage: bandcamp-dl.py -l <URL> -o <OUTPUT_FOLDER>")
-    sys.exit(2)
-
-for opt, arg in opts:
-    if(opt == '-h'):
-        print("Usage: bandcamp-dl.py -l <URL> -o <OUTPUT_FOLDER>")
-        sys.exit()
-        
-    elif(opt == '-o'):
-        outpath=arg
-        if(outpath[len(outpath)-1] != '/'):
-            outpath=outpath+'/'
-    else:
-        url=arg
-
+parser = argparse.ArgumentParser()
+parser.add_argument("url", help="URL of Video Page", type=str)
+parser.add_argument("-o", "--output", default='./',dest="output", help="Set Output Location", action="store")
+args=parser.parse_args()
+outpath=args.output
+url=args.url
 if(url[len(url)-1]!='/'):
     url=url+'/'
-
 
 downloader=requests.session()
 header={
@@ -63,11 +45,16 @@ if(url[len(url)-4:len(url)-1] == 'com'):
 else:
     page=downloader.get(url, verify=False)
 
-soup = BeautifulSoup(page.text)
+soup = BeautifulSoup(page.text,features="html.parser")
 for link in soup.findAll('a', attrs={'href': re.compile("^/track")}):
-    links.append(url[:len(url)-1]+link.get('href'))
+    if (url[-6:-1] != "music"):
+        links.append(url[:-1]+link.get('href'))
+    else:
+        links.append(url[:-7]+link.get('href'))
 for link in soup.findAll('a', attrs={'href': re.compile("^/album")}):
-    links.append(url[:len(url)-1]+link.get('href'))
-
-for i in links:
-    os.system('youtube-dl -o "'+outpath+'%(album)s/%(title)s.%(ext)s" ' + '"'+i+'"')
+    if (url[-6:-1] != "music"):
+        links.append(url[:-1]+link.get('href'))
+    else:
+        links.append(url[:-7]+link.get('href'))
+    for i in links:
+        os.system('youtube-dl -o "'+outpath+'%(album)s/%(title)s.%(ext)s" ' + '"'+i+'"')
