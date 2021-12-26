@@ -57,4 +57,4 @@ for link in soup.findAll('a', attrs={'href': re.compile("^/album")}):
     else:
         links.append(url[:-7]+link.get('href'))
     for i in links:
-        os.system('youtube-dl -o "'+outpath+'%(album)s/%(title)s.%(ext)s" ' + '"'+i+'"')
+        os.system('yt-dlp -o "'+outpath+'%(album)s/%(title)s.%(ext)s" ' + '"'+i+'"')
